@@ -1,32 +1,26 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 using namespace std;
 
+vector<pair<int, int>> v;
+
+int n, s, e, now, cnt;
 int main() {
-	int n;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	
 	cin >> n;
-
-	vector<pair<int, int>> a;
-	a.reserve(n);
-	for (int i = 0; i < n; i++) {
-		int x, y;
-		cin >> x >> y;
-		a.emplace_back(x,y);
+	for (int i=0; i< n; i++) {
+		cin >> s >> e;
+		v.push_back({e, s});
 	}
-
-	sort(a.begin(), a.end(), [] (const pair<int, int>& a, const pair<int, int>& b) {
-		if (a.second == b.second) return a.first < b.first;
-		else return a.second < b.second;
-		});
-
-	int count = 0;
-	int y = -1;
-	for (auto& k : a) {
-		if (k.first >= y) {
-			y = k.second;
-			count++;
+	sort(v.begin(), v.end()); 
+	 
+	for(int i=0; i<v.size(); i++) {
+		if (v[i].second >= now) {
+			now = v[i].first;
+			cnt++;
 		}
-	}
-	cout << count << '\n';
+	} 
+	cout << cnt << '\n';
 }
